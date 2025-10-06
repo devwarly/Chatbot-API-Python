@@ -1,0 +1,99 @@
+body {
+    /* Garante que o body ocupe 100% da largura e altura da tela */
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    /* Configuração Flexbox para CENTRALIZAÇÃO TOTAL */
+    display: flex;
+    justify-content: center;
+    /* Centraliza horizontalmente o conteúdo do body */
+    align-items: center;
+    background-color: rgb(3, 8, 10);
+}
+
+.success-container {
+    /* Opcional: Adiciona espaçamento para não colar nas bordas do celular */
+    padding: 20px;
+
+    /* Garante que o contêiner de sucesso use o máximo de Flexbox */
+    display: flex;
+    flex-direction: column;
+    /* Organiza os filhos (SVG e H3) verticalmente */
+    align-items: center;
+    /* Centraliza os itens (o SVG e o H3) */
+    text-align: center;
+    /* Centraliza o texto dentro dos elementos */
+    max-width: 90%;
+    /* Impede que o container ultrapasse a largura da tela */
+}
+
+.success-icon {
+    width: 100px;
+    height: 100px;
+    transform: scale(0);
+    animation: pop-in 0.5s ease-out forwards;
+}
+
+#outer-circle {
+    stroke-dasharray: 263;
+    stroke-dashoffset: 263;
+    animation: draw-circle 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+#inner-circle {
+    opacity: 0;
+    animation: fill-circle 0.6s ease-in-out 0.6s forwards;
+}
+
+#checkmark {
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: draw-checkmark 0.6s cubic-bezier(0.4, 0, 0.2, 1) 1.2s forwards;
+}
+
+@keyframes pop-in {
+    0% {
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes draw-circle {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fill-circle {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes draw-checkmark {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.success-container h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.success-container h3 span {
+    font-size: 20px;
+    color: #d6f0f7;
+}

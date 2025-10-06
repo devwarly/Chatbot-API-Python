@@ -1,0 +1,481 @@
+:root {
+    --bg-color: #0d0d0d;
+    /* Fundo principal: Preto profundo */
+    --card-color: #1a1a1a;
+    /* Fundo do cartão: Escuro/Minimalista */
+    --text-color: #f0f0f0;
+    /* Texto principal: Branco suave */
+    --sub-text-color: #999999;
+    /* Cinza suave para labels/descrições */
+    --highlight-color: #00e5ff;
+    /* Ciano vívido para destaque */
+    --highlight-dark: #00b3cc;
+    --warning-color: #ffaa00;
+    --success-color: #4CAF50;
+    --input-bg: #2b2b2b;
+    /* Fundo do input mais escuro que o card */
+    --border-color: #444444;
+    --danger-color: #e53935;
+    /* Vermelho para Logout/Atenção */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 0;
+    box-sizing: border-box;
+}
+
+/* --- Botão de Volta (Minimalista) --- */
+.back-button {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: black;
+    text-decoration: none;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.2s;
+    font-weight: 500;
+    z-index: 10;
+}
+
+.back-button:hover {
+    color: #fff;
+    background-color: var(--highlight-color);
+}
+
+.back-button i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* --- Layout Principal & Responsividade --- */
+.profile-container {
+    width: 100%;
+    max-width: 700px;
+    /* Max 50% em desktop */
+    min-width: 300px;
+    padding: 0 15px;
+    /* Pequeno espaçamento nas bordas */
+    box-sizing: border-box;
+    text-align: center;
+    margin: 0 auto;
+    /* Centraliza */
+}
+
+/* Títulos */
+h1 {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-top: 25px;
+}
+
+.profile-container>p {
+    /* Descrição */
+    color: var(--sub-text-color);
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+h2 {
+    font-size: 1.0rem;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: var(--sub-text-color);
+    text-align: left;
+    font-weight: 600;
+}
+
+.profile-card {
+    background-color: var(--card-color);
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+    text-align: left;
+    color: var(--text-color);
+}
+
+/* --- Seção de Foto de Perfil --- */
+.profile-pic-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-pic-large {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--highlight-color);
+    margin-bottom: 15px;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.upload-label {
+    background-color: transparent;
+    color: var(--highlight-color);
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s, border-color 0.2s;
+    border: 1px solid var(--highlight-color);
+    font-size: 0.9rem;
+}
+
+.upload-label:hover {
+    background-color: rgba(0, 229, 255, 0.15);
+}
+
+.upload-label i {
+    margin-right: 5px;
+}
+
+/* --- Campos de Input (Minimalista/Ícones) --- */
+.input-group {
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    /* Mantém a label visível */
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    color: var(--sub-text-color);
+    font-weight: 500;
+}
+
+.input-field-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+}
+
+.input-field-wrapper .icon {
+    color: var(--highlight-color);
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 0;
+    background-color: var(--input-bg);
+    border: none;
+    color: var(--text-color);
+    box-sizing: border-box;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-field-wrapper:focus-within {
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 1px var(--highlight-color);
+}
+
+.input-group input::placeholder {
+    color: #666;
+}
+
+/* --- Mensagens de Status --- */
+.message-container {
+    /* 🌟 Centralização Fixo: Essencial para fixar na viewport */
+    position: fixed;
+    top: 50px; /* Distância do topo */
+    z-index: 10000; /* Garante que fique no topo de tudo */
+    
+    /* Centralização Horizontal */
+    left: 50%;
+    transform: translateX(-50%); /* Move 50% para trás para centralizar o bloco */
+
+    /* Dimensões */
+    width: 90%; /* Ocupa 90% da largura em telas menores */
+    max-width: 500px; /* Limite máximo em telas grandes */
+
+    /* Padding horizontal para telas muito pequenas */
+    padding: 0 20px;
+    box-sizing: border-box; 
+    
+    /* Opcional: Transição de entrada para a mensagem (se quiser que ela deslize) */
+    transition: all 0.3s ease-in-out; 
+}
+
+.profile-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease-in-out; /* Para o desaparecimento suave */
+}
+
+.profile-alert .alert-content {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.profile-alert .alert-content i {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+/* --- Variações de Cor --- */
+
+.alert-success {
+    background-color: #d4edda; /* Light Green */
+    color: #155724; /* Dark Green Text */
+    border: 1px solid #c3e6cb;
+}
+.alert-success i {
+    color: #155724;
+}
+
+.alert-error {
+    background-color: #f8d7da; /* Light Red */
+    color: #721c24; /* Dark Red Text */
+    border: 1px solid #f5c6cb;
+}
+.alert-error i {
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: #fff3cd; /* Light Yellow */
+    color: #856404; /* Dark Yellow Text */
+    border: 1px solid #ffeeba;
+}
+.alert-warning i {
+    color: #856404;
+}
+
+/* --- Botão de Fechar --- */
+
+.alert-close-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0 5px;
+    margin-left: 10px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.alert-close-btn:hover {
+    opacity: 1;
+}
+
+.alert-close-btn i {
+    font-size: 1.1rem;
+}
+
+.warning-text {
+    color: var(--warning-color);
+}
+
+.success-text {
+    color: var(--success-color);
+}
+
+.success-text i,
+.warning-text i {
+    margin-right: 5px;
+    font-size: 1rem;
+}
+
+.data-registro {
+    margin-top: 40px;
+    font-size: 0.75rem;
+    color: #555;
+    text-align: center;
+}
+
+/* --- Botões Principais --- */
+.btn-primary {
+    width: 100%;
+    padding: 16px;
+    margin-top: 40px;
+    background-color: var(--highlight-color);
+    color: var(--bg-color);
+    /* Texto escuro contra o ciano */
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(0, 229, 255, 0.1);
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--card-color);
+    color: var(--highlight-color);
+    border: 1px solid var(--highlight-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--highlight-dark);
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.5);
+}
+
+/* --- Botão Sair da Conta (Logout - Local Seguro) --- */
+.logout-container {
+    width: 700px;
+    max-width: 50%;
+    /* Mantém o alinhamento com o profile-container */
+    margin: 30px auto 0;
+    /* Espaçamento claro abaixo do cartão de perfil */
+    padding: 0 15px;
+}
+
+@media (max-width: 768px) {
+    .logout-container {
+        max-width: 100%;
+    }
+}
+
+.btn-logout {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+.btn-logout:hover {
+    color: var(--text-color);
+    border-color: var(--danger-color);
+    background-color: var(--danger-color);
+}
+
+/* --- ESTILOS PARA MODAL DE CONFIRMAÇÃO CUSTOMIZADO --- */
+
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001; /* Maior que o z-index da mensagem */
+}
+
+.custom-modal-content {
+    background-color: rgb(3, 8, 10); /* Cor do seu fundo */
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    animation: scaleIn 0.2s forwards;
+}
+
+@keyframes scaleIn {
+    to {
+        transform: scale(1);
+    }
+}
+
+.custom-modal-content h3 {
+    margin-top: 5px;
+    font-size: 1.5rem;
+    color: #f8d7da; /* Cor para dar destaque ao título */
+}
+
+.custom-modal-content p {
+    margin: 15px 0 25px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.modal-icon-warning {
+    font-size: 2.5rem;
+    color: #f0ad4e; /* Amarelo/Laranja de alerta */
+    margin-bottom: 10px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+/* Estilos para os botões dentro do modal */
+.btn-primary-modal, .btn-secondary-modal {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.btn-primary-modal {
+    background-color: #d9534f; /* Cor Vermelha para Sair */
+    color: white;
+    border: 1px solid #d9534f;
+}
+
+.btn-primary-modal:hover {
+    background-color: #c9302c;
+}
+
+.btn-secondary-modal {
+    background-color: transparent;
+    color: #aaa;
+    border: 1px solid #555;
+}
+
+.btn-secondary-modal:hover {
+    background-color: #333;
+    color: #fff;
+}

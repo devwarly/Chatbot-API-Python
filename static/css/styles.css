@@ -1,0 +1,278 @@
+body {
+  font-family: "Inter", sans-serif; /* Usando Inter, similar ao visual do OpenAI */
+  background-color: rgb(3, 8, 10); /* Fundo preto */
+  color: #fff; /* Texto branco */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%; /* Garante que HTML e Body ocupem 100% da largura */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.button {
+  background-color: #007bff; /* Azul vibrante */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  width: 50%; /* Largura padrão */
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
+}
+
+.button:hover {
+  background-color: #007bffa9; /* Azul mais claro no hover */
+}
+
+span {
+  color: #7bdfec;
+}
+
+.navbar {
+  margin-top: 10px;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  box-sizing: border-box; /* Garante que o padding não aumente a largura */
+}
+
+.navbar-left .logo {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.navbar-right .nav-button {
+  background-color: #ffffff; /* Botão Login com fundo escuro */
+  color: #000000;
+  padding: 8px 18px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.95em;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-right .nav-button:hover {
+  background-color: #eeeeeece;
+  color: #000000;
+}
+
+.hero-section {
+  width: 100%;
+  max-width: 800px; /* Largura central para o conteúdo principal */
+  text-align: center;
+  padding: 80px 20px 40px;
+  box-sizing: border-box;
+}
+
+.hero-content h1 {
+  font-size: 3.5em;
+  font-weight: 700;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.hero-content .subtitle {
+  font-size: 1.2em;
+  color: #aaa;
+  margin-bottom: 40px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-block;
+  padding: 15px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-primary {
+  background-color: #fff; /* Botão principal branco */
+  color: #000;
+  border: 1px solid #fff;
+}
+
+.button-primary:hover {
+  background-color: #eeeeeece;
+}
+
+.button-secondary {
+  background-color: transparent; /* Botão secundário transparente */
+  color: #fff;
+  border: 1px solid #555; /* Borda cinza */
+}
+
+.button-secondary:hover {
+  background-color: rgb(16, 26, 31);
+  border-color: #fff;
+}
+
+.content-section {
+  width: 100%;
+  max-width: 800px;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  line-height: 1.6;
+  font-size: 1.05em;
+  color: #ccc;
+  text-align: center; /* Alinha o texto do conteúdo no centro */
+}
+
+.content-section p {
+  margin-bottom: 20px;
+}
+
+.content-section a {
+  color: #61dafb; /* Um tom de azul para links */
+  text-decoration: none;
+}
+
+.content-section a:hover {
+  text-decoration: underline;
+}
+
+.footer-section {
+  width: 100%;
+  max-width: 1200px;
+  padding: 40px 20px;
+  text-align: center;
+  color: #555;
+  font-size: 0.9em;
+  margin-top: auto; /* Empurra o footer para o final da página */
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 50%;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.form-container h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+  align-items: center;
+}
+
+.form input {
+  width: 60px;
+  height: 60px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 20px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form input:focus {
+  border-color: #00ffff;
+  box-shadow: 0 2px 8px rgba(0, 200, 167, 0.2);
+}
+
+.code-container {
+  display: flex;
+  gap: 20px;
+}
+
+.code-input {
+    text-align: center;
+}
+
+
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .hero-section {
+    padding: 60px 20px 30px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5em;
+  }
+
+  .hero-content .subtitle {
+    font-size: 1em;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .button-primary,
+  .button-secondary {
+    width: 100%; /* Botões ocupam a largura total em telas menores */
+    max-width: 300px; /* Limita a largura máxima dos botões */
+    margin: 0 auto;
+  }
+
+  .content-section {
+    padding: 30px 20px;
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-left .logo {
+    font-size: 1.3em;
+  }
+  .navbar-right .nav-button {
+    padding: 6px 12px;
+    font-size: 0.9em;
+  }
+  .hero-content h1 {
+    font-size: 2em;
+  }
+}

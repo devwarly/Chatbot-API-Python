@@ -1,0 +1,932 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --nav-bg: #1e272c;
+    --nav-text-color: #f0f0f0;
+    --nav-sub-text: #999999;
+    --nav-hover: #2b3a44;
+}
+
+body {
+    background-color: rgb(3, 8, 10);
+    height: 100vh;
+    display: flex;
+    position: relative;
+}
+
+.nav_menu.expanded {
+    width: 240px;
+    /* Aumentei para dar mais espaço */
+    align-items: flex-start;
+    padding-left: 15px;
+}
+
+/* NOVO: Título do Histórico */
+.chat-history-title {
+    width: 100%;
+    margin-top: 20px;
+    padding: 0 15px;
+    /* Alinha com os itens */
+    box-sizing: border-box;
+}
+
+.chat-history-title p {
+    color: var(--nav-sub-text);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+
+    /* CONTROLADO POR JS: Esconder o título quando colapsado */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Lista de Histórico */
+.conversation-list {
+    list-style: none;
+    width: 100%;
+    overflow-y: auto;
+
+
+    /* CONTROLADO POR JS: Esconder a lista quando colapsada */
+
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* === REGRAS DE EXPANSÃO (Quando a nav tem a classe 'expanded') === */
+
+.nav_menu.expanded .chat-history-title p,
+.nav_menu.expanded .conversation-list {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilo para cada item do histórico */
+.conversation-item {
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+
+    /* REMOVA ESTAS TRÊS LINHAS: */
+    /* overflow: hidden; */
+    /* white-space: nowrap; */
+    /* text-overflow: ellipsis; */
+
+    transition: background-color 0.2s;
+    color: var(--nav-text-color);
+    font-size: 0.95rem;
+
+    /* Estas garantem quebra de palavras longas, o que é bom */
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.conversation-item:hover {
+    background-color: var(--nav-hover);
+}
+
+.conv-title {
+    display: block;
+    font-weight: 500;
+    color: var(--text-color);
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.conv-date {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--nav-sub-text);
+    margin-top: 2px;
+}
+
+.conversation-item.no-history,
+.conversation-item.error-history {
+    color: var(--sub-text-color);
+    text-align: center;
+    font-size: 0.85rem;
+    padding-top: 20px;
+}
+
+.perfil {
+    background-color: #01d9ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 2px;
+    height: 52px;
+}
+
+.perfil img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.sssp {
+    color: #7bdfec;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(7, 19, 24) inset !important;
+    -webkit-text-fill-color: #fff !important;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-right: 20px;
+    text-align: justify;
+    padding-left: 80px;
+    /* Alinhado com o menu colapsado */
+    color: #fff;
+    transition: 0.3s ease-in-out;
+    background-color: rgb(3, 8, 10);
+}
+
+/* --- ESTILOS DE IDIOMA E TRADUÇÃO --- */
+.dv_op_languange {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.button {
+    /* Botão "Tradução" */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    background: none;
+    padding: 0;
+}
+
+.button p {
+    /* Texto "Tradução" */
+    font-size: 12px;
+    color: #ffffff65;
+    margin-top: 5px;
+}
+
+.button:hover {
+    color: #0056b3;
+}
+
+.options-container {
+    width: 120px;
+    display: none;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #1e272c;
+    font-size: 14px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transform-origin: top right;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.options-container.show {
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Estilos para esconder/mostrar o conteúdo de idioma */
+.lang-content {
+    display: none;
+    /* Esconde todos os conteúdos de idioma por padrão */
+}
+
+.lang-content.active {
+    display: block;
+    /* Mostra o conteúdo do idioma ativo */
+}
+
+/* Estilos para o container de opções de idioma (se não estiverem no app.css) */
+.options-container {
+    display: none;
+    /* Esconde o container por padrão */
+    position: absolute;
+    top: 50px;
+    /* Ajuste conforme a posição do seu botão de "Tradução" */
+    right: 10px;
+    background-color: #1e272c;
+    /* Mesma cor do menu */
+    border: 1px solid #ffffff2a;
+    /* Borda sutil */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #fff;
+    transform-origin: top right;
+    /* Ponto de origem para animação */
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.options-container.show {
+    display: block;
+    /* Mostra o container quando a classe 'show' é adicionada */
+    opacity: 1;
+    transform: scale(1);
+}
+
+.ttt-dv {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #1e272c;
+    top: -7px;
+    right: 18px;
+    /* Ajuste para alinhar com o botão */
+    transform: rotate(45deg);
+    z-index: 1001;
+    /* Garante que fique acima do container */
+    border-top: 1px solid #ffffff2a;
+    border-left: 1px solid #ffffff2a;
+}
+
+.ttt-dv {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #1e272c;
+    top: -7px;
+    margin-right: 14px;
+    transform: rotate(45deg);
+    z-index: 1001;
+    border-top: 1px solid #ffffff2a;
+    border-left: 1px solid #ffffff2a;
+}
+
+.option {
+    cursor: pointer;
+    padding: 8px 10px;
+    margin-top: 2px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.option:hover {
+    background-color: #02fcfc34;
+}
+
+/* Estilos para esconder/mostrar o conteúdo de idioma */
+.lang-content {
+    display: none;
+}
+
+.lang-content.active {
+    display: block;
+}
+
+/* --- ESTILOS DO MENU LATERAL --- */
+.nav_menu {
+    width: 60px;
+    height: 100%;
+    background-color: var(--nav-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+    overflow: hidden;
+    z-index: 20;
+    position: fixed;
+    /* Adicionado fixed para o menu */
+    left: 0;
+    top: 0;
+}
+
+.nav_menu.expanded {
+    width: 200px;
+    align-items: flex-start;
+    padding-left: 15px;
+}
+
+.nav_opcs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 10px 0;
+    transition: background-color 0.2s ease, padding 0.2s ease,
+        justify-content 0.3s ease;
+}
+
+.nav_opcs i {
+    color: #fff;
+    font-size: 35px;
+    cursor: pointer;
+    transition: font-size 0.3s ease, margin-right 0.3s ease;
+}
+
+.nav_opcs p {
+    color: #fff;
+    font-size: 1em;
+    white-space: nowrap;
+    opacity: 0;
+    max-width: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out, max-width 0.3s ease-in-out,
+        margin-left 0.3s ease-in-out;
+    margin-left: 0;
+}
+
+.nav_opcs_expanded {
+    justify-content: flex-start;
+    padding-left: 5px;
+}
+
+.nav_opcs_expanded i {
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+.nav_opcs_expanded p {
+    opacity: 1;
+    max-width: 150px;
+    margin-left: 5px;
+}
+
+/* Mouse_over - sobreposição para fechar o menu ao clicar fora */
+.mouse_over {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(3, 8, 10, 0.7);
+    z-index: 10;
+    display: none;
+}
+
+/* --- ESTILOS DO CHAT --- */
+.div_chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-left: 80px;
+    /* Offset inicial para o menu colapsado */
+    transition: padding-left 0.3s ease-in-out;
+}
+
+/* Ajustes para o chat-box */
+.chat-box {
+    width: 100%;
+    padding: 20px 25%;
+    color: #ffff;
+    border-radius: 10px;
+    overflow-y: auto;
+    margin-top: 100px;
+    /* Espaço para o header fixo */
+    display: flex;
+    flex-direction: column;
+    /* 🌟 NOVO: Adicione position: relative para que a mensagem .wellcome seja centralizada em relação a ele */
+    position: relative;
+    flex-grow: 1;
+}
+
+.wellcome {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+
+    /* 🌟 MUDANÇA CRÍTICA: Centralização Fixed */
+    /* Usamos fixed para centralizar na viewport, independente do teclado virtual */
+    position: fixed;
+
+    /* Calculamos a centralização na viewport */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* NOVO: Ajuste a margem superior para compensar o header fixo */
+    /* O header tem 100px. Você precisa subir a mensagem um pouco para o centro "visual" */
+    margin-top: -30px;
+
+    /* Z-Index: Garante que fique acima do chat-box */
+    z-index: 10;
+}
+
+/* O resto do bloco CSS permanece inalterado */
+.wellcome span {
+    color: #01d9ff;
+    color: #01d9ff;
+}
+
+
+/* NOVO: Wrapper para o formulário de chat */
+.chat-input-wrapper {
+    position: fixed;
+    bottom: 0;
+    /* left e width serão ajustados via JS */
+    display: flex;
+    justify-content: center;
+    /* Centraliza o formulário dentro do wrapper */
+    z-index: 5;
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+    padding: 10px 0;
+    /* Padding vertical para o wrapper */
+    background-color: rgb(3,
+            8,
+            10);
+    /* Garante que o fundo não seja transparente */
+}
+
+#chat-form {
+    width: 100%;
+    /* Ocupa 100% do wrapper */
+    max-width: 800px;
+    /* Limite máximo de largura */
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(7, 19, 24);
+    /* Fundo do formulário */
+    padding: 20px 40px;
+    border: 1px solid #ffffff2a;
+    border-radius: 20px;
+    box-sizing: border-box;
+    /* Inclui padding e border na largura */
+}
+
+#chat-form input[type="text"] {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    color: #fff;
+    font-size: 18px;
+    flex-grow: 1;
+}
+
+#chat-form button {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #ffffff09;
+    border: none;
+    transform: rotate(45deg);
+    padding: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#chat-form button:hover {
+    background-color: #0000001e;
+}
+
+#chat-form button i {
+    color: #fff;
+    font-size: 30px;
+    margin-right: 4px;
+    margin-top: 9px;
+}
+
+.menu_cllr {
+    /* Botão de menu para celular */
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: #9292927c;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 25;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.menu_cllr i {
+    font-size: 22px;
+    color: #ffffff81;
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    position: relative;
+    padding: 10px;
+    border-radius: 8px;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.message.user {
+    background-color: #234c69d2;
+    align-self: flex-end;
+    text-align: right;
+    color: #ffffff;
+    margin-left: auto;
+    margin-top: 40px;
+}
+
+.message.bot {
+    background-color: #5e97c007;
+    align-self: flex-start;
+    color: #ffffff;
+    margin-right: auto;
+}
+
+.message-content {
+    flex: 1;
+    line-height: 1.6;
+    padding-right: 30px;
+    white-space: pre-wrap;
+    /* Preserva espaços em branco e quebras de linha */
+}
+
+/* --- ESTILOS DE DESTAQUE DE SINTAXE --- */
+.comment {
+    color: #6a9955;
+}
+
+.keyword {
+    color: #c678dd;
+    font-weight: bold;
+}
+
+.string {
+    color: #98c379;
+}
+
+.number {
+    color: #d19a66;
+}
+
+.highlighted-text {
+    background-color: #4caf50;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* --- ESTILOS ADICIONAIS PARA FORMATAÇÃO DO CHAT --- */
+
+/* Títulos H1 (convertidos de # no Markdown) */
+.message-h1 {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #01d9ff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(1, 217, 255, 0.2);
+}
+
+/* Subtítulos H2 (convertidos de ## no Markdown) */
+.message-h2 {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #81d4fa;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Negrito (convertido de **texto** no Markdown) */
+.message-bold {
+    font-weight: bold;
+    color: #06f1e6;
+}
+
+/* Itálico (convertido de *texto* ou _texto_ no Markdown) */
+.message-italic {
+    font-style: italic;
+    color: #2214ee;
+}
+
+/* Melhoria para as quebras de linha em listas ou parágrafos */
+.message-content br {
+    margin-top: 8px;
+}
+
+/* Melhoria para listas (se o bot gerar Markdown de lista) */
+.message-content ul,
+.message-content ol {
+    margin-left: 20px;
+    margin-top: 10px;
+    list-style-position: outside;
+    padding-left: 10px;
+}
+
+.message-content li {
+    margin-bottom: 5px;
+    color: #ffffff;
+}
+
+.copy-icon {
+    position: absolute;
+    padding-top: 10px;
+    top: 100%;
+    left: 10px;
+    color: #17b0f7;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.copy-icon:hover {
+    opacity: 1;
+}
+
+.copy-confirmation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(8, 51, 47, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.copy-confirmation.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-indicator {
+    position: fixed;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    color: #81d4fa;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    background-color: rgba(30, 39, 44, 0.8);
+    padding: 8px 15px;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 6;
+}
+
+.loading-indicator.show {
+    opacity: 1;
+}
+
+.spinner {
+    border: 2px solid rgba(129, 212, 250, 0.3);
+    border-top: 2px solid #81d4fa;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    animation: spin 1s linear infinite;
+    margin-right: 5px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.success-container {
+    /* Opcional: Adiciona espaçamento para não colar nas bordas do celular */
+    padding: 20px;
+
+    /* Garante que o contêiner de sucesso use o máximo de Flexbox */
+    display: flex;
+    flex-direction: column;
+    /* Organiza os filhos (SVG e H3) verticalmente */
+    align-items: center;
+    /* Centraliza os itens (o SVG e o H3) */
+    text-align: center;
+    /* Centraliza o texto dentro dos elementos */
+    max-width: 90%;
+    /* Impede que o container ultrapasse a largura da tela */
+}
+
+.success-icon {
+    width: 100px;
+    height: 100px;
+    transform: scale(0);
+    animation: pop-in 0.5s ease-out forwards;
+}
+
+#outer-circle {
+    stroke-dasharray: 263;
+    stroke-dashoffset: 263;
+    animation: draw-circle 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+#inner-circle {
+    opacity: 0;
+    animation: fill-circle 0.6s ease-in-out 0.6s forwards;
+}
+
+#checkmark {
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: draw-checkmark 0.6s cubic-bezier(0.4, 0, 0.2, 1) 1.2s forwards;
+}
+
+@keyframes pop-in {
+    0% {
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes draw-circle {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fill-circle {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes draw-checkmark {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.success-container h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.success-container h3 span {
+    font-size: 20px;
+    color: #d6f0f7;
+}
+
+.falaai-btn {
+    background-color: #01d9ff;
+    text-decoration: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 7px;
+    color: #fff;
+    border: 1px solid #ffffff63;
+    transition: 0.3s;
+}
+
+.falaai-btn:hover {
+    opacity: 70%;
+    scale: 1.03;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header {
+        padding-left: 20px;
+        align-items: center;
+    }
+
+    .div_chat {
+        padding-left: 20px;
+    }
+
+    .nav_menu {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        margin-left: -200px;
+        transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+        width: 200px;
+    }
+
+    .nav_menu.expanded {
+        margin-left: 0;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .menu_cllr {
+        display: flex;
+    }
+
+    .chat-box {
+        padding: 10px 5%;
+        margin-top: 80px;
+        margin-bottom: 100px;
+    }
+
+    .wellcome {
+        font-size: 20px;
+        /* Reajusta se houver necessidade de centralização em mobile */
+        /* Mantenha o transform: translate(-50%, -50%) */
+    }
+
+    .chat-input-wrapper {
+        padding: 10px 0;
+        /* Padding do wrapper */
+        left: 0;
+        width: 100%;
+    }
+
+    #chat-form {
+        max-width: calc(100% - 40px);
+        /* 20px padding do wrapper em cada lado */
+        padding: 15px 20px;
+    }
+
+    #chat-form input {
+        font-size: 16px;
+    }
+
+    .wellcome {
+        font-size: 20px;
+    }
+}
+
+/* Para telas muito pequenas, ajuste ainda mais */
+@media (max-width: 480px) {
+    #chat-form {
+        padding: 10px 15px;
+    }
+
+    #chat-form button {
+        width: 40px;
+        height: 40px;
+    }
+
+    #chat-form button i {
+        font-size: 25px;
+    }
+}

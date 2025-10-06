@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FalaAI - Sucesso</title>
+    <link rel="stylesheet" href="../static/css/animatiom.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+   <div class="container success-container">
+        <svg class="success-icon" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle id="inner-circle" cx="50" cy="50" r="40" fill="#0056b3"/>
+            <path id="outer-circle" d="M50 10C72.913 10 92 29.087 92 52C92 74.913 72.913 94 50 94C27.087 94 8 74.913 8 52C8 29.087 27.087 10 50 10Z" fill="none" stroke="#033c79" stroke-width="8"/>
+            <path id="checkmark" d="M35 52L45 62L65 42" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        <h3>Cadastro realizado!<br><span>Você está sendo redirecionado para o chat.</span></h3>
+        
+    </div>
+    <script>
+        // Redireciona para a página de chat após 2 segundos
+        setTimeout(() => {
+            window.location.href = "/chat";
+        }, 2000); // 2 segundos de delay
+    </script>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

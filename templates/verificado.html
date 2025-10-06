@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FalaAI - E-mail Verificado</title>
+    <link rel="stylesheet" href="../static/css/app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0d0d0d;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+        }
+        .container {
+            background-color: #1a1a1a;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            max-width: 400px;
+            width: 90%;
+        }
+        .success-icon {
+            margin-bottom: 20px;
+        }
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        h3 span {
+            color: #00e5ff; /* Ciano de destaque */
+            font-weight: 700;
+        }
+        p {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+        .login-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #00e5ff;
+            color: #0d0d0d;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: background-color 0.2s;
+        }
+        .login-button:hover {
+            background-color: #00b3cc;
+        }
+        /* Estilos do SVG */
+        #inner-circle { fill: #00e5ff; }
+        #outer-circle { stroke: #00b3cc; }
+        #checkmark { stroke: #0d0d0d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg class="success-icon" width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle id="inner-circle" cx="50" cy="50" r="40"/>
+            <path id="outer-circle" d="M50 10C72.913 10 92 29.087 92 52C92 74.913 72.913 94 50 94C27.087 94 8 74.913 8 52C8 29.087 27.087 10 50 10Z" fill="none" stroke-width="8"/>
+            <path id="checkmark" d="M35 52L45 62L65 42" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        
+        <h3>Parabéns!<span><br>Seu e-mail foi verificado com sucesso.</span></h3>
+        <p>Clique no botão abaixo para ir para a tela de login e acessar o chat.</p>
+        
+        <a href="/login" class="login-button">Fazer Login</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,539 @@
+/* Estilos gerais para o corpo e contêiner do formulário */
+body {
+  font-family: "Inter", sans-serif;
+  background-color: rgb(3, 8, 10); /* Seu fundo escuro */
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%; /* Garante que HTML e Body ocupem 100% da largura */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.message-area {
+    /* Posicionamento Fixo no Topo */
+    position: fixed;
+    margin-top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+    width: 90%; /* Padrão para mobile */
+    max-width: 500px; /* Largura máxima para desktop */
+
+    /* Controle de Visibilidade */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+}
+
+/* Estado de MENSAGEM VISÍVEL (SHOW) */
+.message-area.show-message {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilo Base da Notificação (simulando o .error que você forneceu) */
+.alert {
+    font-family: "Inter", sans-serif;
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra mais destacada */
+    width: 100%; /* Ocupa a largura do message-area */
+    color: #fff; /* Cor do texto padrão */
+}
+
+.alert__icon,
+.alert__close {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    flex-shrink: 0; 
+}
+.alert__close {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+/* 🌟 CORREÇÃO DE BUG: Força a cor branca para os ícones em alertas 'error' e 'success' */
+.message-area.error .alert__icon path,
+.message-area.error .alert__close path,
+.message-area.success .alert__icon path,
+.message-area.success .alert__close path {
+    fill: #fff !important; /* Usamos !important para garantir que sobreponha qualquer estilo inline */
+}
+
+/* Adicione estas regras para colorir a tag <i> (Bootstrap Icons) */
+.alert__icon i,
+.alert__close i {
+    color: inherit; /* Herda a cor do .alert__title ou do .alert */
+    font-size: 1.25rem; /* Ajuste o tamanho se necessário */
+}
+
+/* Cores Brancas (padrão) */
+.message-area.error .alert__icon i,
+.message-area.success .alert__icon i,
+.message-area.error .alert__close i,
+.message-area.success .alert__close i {
+    color: #fff !important;
+}
+
+/* Cor Escura para Alerta Info */
+.message-area.info .alert__icon i,
+.message-area.info .alert__close i {
+    color: #03080a !important;
+}
+
+/* Estilo do Título/Mensagem */
+.alert__title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4; /* Melhora a legibilidade em várias linhas */
+    margin: 0;
+}
+/* Estilo para links dentro da mensagem */
+.alert__title a {
+    color: inherit; /* Mantém a cor do texto do alerta */
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+
+/* --- VARIAÇÕES DE COR --- */
+
+/* ERROR (Vermelho - como o seu exemplo) */
+.message-area.error .alert {
+    background: #EF665B; /* Vermelho mais forte */
+}
+
+/* SUCCESS (Verde) */
+.message-area.success .alert {
+    background: #4BB543; /* Verde de sucesso */
+}
+
+/* INFO (Azul/Ciano) */
+.message-area.info .alert {
+    background: #7bdfec; /* Sua cor de destaque */
+    color: #03080a; /* Texto escuro para contraste */
+}
+/* Ícones do Alerta Info devem ser escuros */
+.message-area.info .alert__icon path,
+.message-area.info .alert__close path {
+    fill: #03080a;
+}
+
+/* --- RESPONSIVIDADE PARA ALERTAS --- */
+@media (max-width: 600px) {
+    .message-area {
+        top: 10px; /* Mais perto do topo em mobile */
+        width: 95%; /* Ocupa um pouco mais de espaço */
+    }
+}
+
+/* Navbar */
+.navbar {
+  margin-top: 10px;
+  width: 90%;
+  max-width: 700px; /* Largura máxima da navbar alinhada ao formulário */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+  box-sizing: border-box;
+}
+
+.navbar-left .logo {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.navbar-right .nav-button {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 8px 18px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.95em;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-right .nav-button:hover {
+  background-color: #eeeeeece;
+  color: #000000;
+}
+
+/* Div principal do formulário (div_prin_login) */
+.div-prin-login {
+  background-color: rgb(
+    3,
+    8,
+    10
+  ); /* Mesma cor do body para um visual mais limpo */
+  border-radius: 8px;
+  width: 90%; /* Ocupa 90% da largura disponível */
+  max-width: 700px; /* Largura máxima do formulário */
+  box-sizing: border-box;
+  margin-top: 20px; /* Margem para separar da navbar */
+  padding: 40px; /* Adicionado padding para o conteúdo interno do formulário */
+}
+
+/* Estilo para o formulário (form) */
+form {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px; /* Espaçamento entre os campos */
+}
+
+/* Estilo específico para o formulário de login (for-login) */
+.for-login {
+  display: flex;
+  flex-direction: column;
+  padding: 0; /* Removido padding duplicado se já está em .div-prin-login */
+}
+
+/* Input Group (para campos de texto/senha/email) */
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Ajuste para 2 colunas: 50% menos metade do gap. Em mobile, será 100% */
+  flex: 1 1 calc(50% - 10px);
+  min-width: 250px; /* Largura mínima para evitar campos muito estreitos */
+  margin-bottom: 10px; /* Espaçamento entre os grupos */
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"] {
+  outline: none;
+  background-color: rgb(3, 8, 10);
+  color: #fff;
+  padding: 10px 15px;
+  border: 1px solid #cccccc49;
+  border-radius: 4px;
+  font-size: 1em;
+  line-height: 1.5;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-group label {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #bbb;
+  font-size: 1em;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  background-color: transparent;
+  z-index: 1;
+}
+
+/* Estilos para autofill do navegador */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(3, 8, 10) inset !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+/* Efeito de label flutuante */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -8px;
+  font-size: 0.75em;
+  color: #7bdfec;
+  background-color: rgb(3, 8, 10); /* Cor de fundo do formulário */
+  padding: 0 5px;
+  left: 10px;
+  transform: translateY(0%);
+  z-index: 2;
+}
+
+.input-group input:not(:focus):placeholder-shown + label {
+  color: #bbb;
+  font-size: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  left: 15px;
+}
+
+.hint {
+  font-size: 0.75em;
+  color: #aaaaaa81;
+  top: 50px; /* Ajustado para ficar abaixo do input */
+  padding-left: 5px;
+  position: absolute; /* Para posicionar em relação ao input-group */
+  width: calc(100% - 10px); /* Ocupa a largura do input */
+}
+
+/* Checkbox de Termos */
+.terms-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  color: #ccc;
+  width: 100%; /* Ocupa a largura total abaixo dos campos */
+  justify-content: flex-start;
+}
+
+.terms-checkbox input[type="checkbox"] {
+  transform: scale(1.2);
+  accent-color: #7bdfec;
+  cursor: pointer;
+}
+
+.terms-checkbox a {
+  color: #7bdfec;
+  text-decoration: underline;
+}
+
+.terms-checkbox a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo base do botão */
+.button {
+  background-color: #007bff; /* Azul vibrante */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1em;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  width: 50%; /* Largura padrão */
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
+}
+
+.button:hover {
+  background-color: #007bffa9; /* Azul mais claro no hover */
+}
+
+/* Estilo para o botão quando estiver inativo/desabilitado */
+.button-inactive {
+  background-color: #cccccc !important; /* Cinza para inativo */
+  cursor: not-allowed !important; /* Cursor de "não permitido" */
+  opacity: 0.7 !important; /* Um pouco transparente */
+}
+
+/* Garante que o hover não funcione no botão inativo */
+.button-inactive:hover {
+  background-color: #cccccc !important; /* Mantém a cor cinza no hover */
+}
+
+/* Estilo para o botão quando estiver ativo */
+.button-active {
+  background-color: #007bff !important; /* Azul vibrante */
+  cursor: pointer !important;
+  opacity: 1 !important;
+}
+
+.button-active:hover {
+  background-color: #0056b3 !important; /* Azul mais escuro ao passar o mouse */
+}
+
+/* Link de cadastro/login abaixo do botão */
+.link-cadastro {
+  text-align: center;
+  margin-top: 20px;
+  color: #f0f0f0;
+}
+
+.link-cadastro a {
+  color: #7bdfec; /* Sua cor de destaque */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.link-cadastro a:hover {
+  color: #007bff; /* Uma variação da cor de destaque */
+}
+
+/* Seção de conteúdo abaixo do formulário */
+.content-section {
+  width: 100%;
+  max-width: 700px;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  line-height: 1.6;
+  font-size: 1.05em;
+  color: #ccc;
+  text-align: center; /* Alinha o texto do conteúdo no centro */
+}
+
+.content-section p {
+  margin-bottom: 20px;
+}
+
+/* Rodapé */
+.footer-section {
+  width: 100%;
+  max-width: 1200px; /* Ajustado para ser mais amplo */
+  padding: 40px 20px;
+  text-align: center;
+  color: #555;
+  font-size: 0.9em;
+  margin-top: auto; /* Empurra o footer para o final da página */
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 600px) {
+  .button {
+    width: 100%; /* Botão ocupa largura total em mobile */
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .content-section {
+    padding: 30px 20px;
+    font-size: 0.95em;
+  }
+  /* Ajustes para o formulário de login em mobile (se for diferente do cadastro) */
+  .for-login {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: column; /* Força empilhamento em coluna */
+    padding: 20px; /* Ajuste o padding para mobile */
+  }
+
+  .div-prin-login {
+    width: 90%; /* Deixa a largura automática para preencher o container */
+    max-width: unset; /* Remove a largura máxima para mobile */
+    padding: 20px; /* Ajuste o padding para mobile */
+  }
+
+  form {
+    flex-direction: column; /* Empilha os campos em uma única coluna */
+    gap: 15px;
+  }
+
+  .input-group {
+    width: 100%; /* Campos ocupam 100% da largura disponível */
+    min-width: unset; /* Remove a largura mínima */
+    flex: unset; /* Reseta o flex-grow/shrink/basis */
+  }
+
+  /* Ordem específica dos campos em celular (necessita de HTML com data-order-mobile nos inputs e filhos diretos do form) */
+  .input-group[data-order-mobile="1"] {
+    order: 1;
+  } /* Nome Completo */
+  .input-group[data-order-mobile="2"] {
+    order: 2;
+  } /* Email */
+  .input-group[data-order-mobile="3"] {
+    order: 3;
+  } /* Senha */
+  .input-group[data-order-mobile="4"] {
+    order: 4;
+  } /* Confirmar Senha */
+
+  .terms-checkbox {
+    order: 5;
+  } /* Checkbox depois dos campos */
+  .button {
+    order: 6;
+  } /* Botão por último */
+
+  .navbar {
+    padding: 15px 0px;
+    max-width: 90%; /* Ajusta navbar para telas menores */
+  }
+  .navbar-left .logo {
+    font-size: 1.2em;
+  }
+  .navbar-right .nav-button {
+    padding: 5px 10px;
+    font-size: 0.85em;
+  }
+
+  /* Seções de conteúdo e segurança (ajuste conforme seu HTML real) */
+  .content-section {
+    padding: 20px 15px;
+    font-size: 0.9em;
+  }
+  /* Se você tiver uma .security-section, ajuste-a aqui */
+  .security-section {
+    padding: 30px 10px;
+  }
+  .security-content h2 {
+    font-size: 1.5em;
+  }
+  .security-content p {
+    font-size: 1em;
+  }
+}
+
+/* Ajustes para telas muito pequenas (smartphones mais antigos ou paisagem) */
+@media (max-width: 400px) {
+  .navbar {
+    padding: 10px 5px;
+  }
+  .navbar-left .logo {
+    font-size: 1.1em;
+  }
+  .navbar-right .nav-button {
+    padding: 4px 8px;
+    font-size: 0.8em;
+  }
+  .div-prin-login {
+    padding: 15px; /* Reduz ainda mais o padding */
+  }
+  .div-prin-login h2 {
+    font-size: 1.6em;
+  }
+  .input-group input {
+    padding: 8px 10px;
+  }
+  .input-group label {
+    font-size: 0.8em;
+    top: 10px;
+  }
+  .input-group input:focus + label,
+  .input-group input:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 0.65em;
+  }
+  .button {
+    padding: 8px 15px;
+    font-size: 1em;
+  }
+  .content-section {
+    padding: 15px 10px;
+    font-size: 0.85em;
+  }
+  .footer-section {
+    padding: 15px 10px;
+    font-size: 0.8em;
+  }
+}

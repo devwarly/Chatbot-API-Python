@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil - FalaAí</title>
+    <!-- Inclua aqui os links CSS que todas as suas páginas usam -->
+    <link rel="stylesheet" href="/static/css/app.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="/static/css/profile.css" />
+</head>
+
+<body>
+
+
+    <div class="profile-container">
+        <a href="/chat" class="back-button">
+            <i class="bi bi-arrow-left-circle-fill"></i>Chat
+        </a>
+        <h1>Meu Perfil</h1>
+
+        <!-- Exibe mensagens de sucesso/erro da atualização -->
+        <div id="message-container" class="message-container"></div>
+
+        <div class="profile-card">
+            <form id="profile-update-form" enctype="multipart/form-data">
+
+                <div class="profile-pic-section">
+                    <!-- Foto de Perfil Atual -->
+                    <img id="profile-pic-preview"
+                        src="{{ user_info.profile_pic_url or '/static/images/default_profile.png' }}"
+                        alt="Foto de Perfil" class="profile-pic-large">
+
+                    <!-- Botão e Campo para Upload da Nova Foto -->
+                    <label for="profile-pic-upload" class="upload-label">
+                        <i class="bi bi-camera"></i> Alterar Foto
+                    </label>
+                    <input type="file" id="profile-pic-upload" name="profile_pic" accept="image/*"
+                        style="display: none;">
+                </div>
+
+                <!-- Dados Pessoais: Nome -->
+                <div class="input-group">
+                    <label for="nome_completo">Nome Completo</label>
+                    <div class="input-field-wrapper">
+                        <i class="bi bi-person icon"></i>
+                        <input type="text" id="nome_completo" name="nome_completo" value="{{ user_info.nome_completo }}"
+                            required>
+                    </div>
+                </div>
+
+                <!-- Dados Pessoais: Email -->
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <div class="input-field-wrapper">
+                        <i class="bi bi-envelope icon"></i>
+                        <input type="email" id="email" name="email" value="{{ user_info.email }}" required>
+                    </div>
+                    {% if not user_info.email_verified %}
+                    <span class="status-message warning-text"><i class="bi bi-exclamation-triangle-fill"></i> Email não
+                        verificado.</span>
+                    {% else %}
+                    <span class="status-message success-text"><i class="bi bi-check-circle-fill"></i> Email
+                        verificado.</span>
+                    {% endif %}
+
+                    {% if not user_info.email_verified %}
+                    <button type="button" id="resend-verification-button" class="btn-secondary"
+                        style="margin-top: 15px;">
+                        <i class="bi bi-envelope-check"></i> Reenviar Link de Verificação
+                    </button>
+                    {% endif %}
+
+                </div>
+
+                <!-- Alteração de Senha -->
+                <h2>Alterar Senha</h2>
+                <div class="input-group">
+                    <label for="senha">Nova Senha</label>
+                    <div class="input-field-wrapper">
+                        <i class="bi bi-lock icon"></i>
+                        <input type="password" id="senha" name="senha" placeholder="Deixe em branco para não alterar">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="confirm_senha">Confirmar Senha</label>
+                    <div class="input-field-wrapper">
+                        <i class="bi bi-lock icon"></i>
+                        <input type="password" id="confirm_senha" name="confirm_senha"
+                            placeholder="Confirme a nova senha">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="save-button">Salvar Alterações</button>
+            </form>
+
+            <p class="data-registro">Membro desde: {{ user_info.data_registro }}</p>
+        </div>
+    </div>
+
+    <!-- CONTAINER SEPARADO PARA LOGOUT -->
+    <div class="logout-container">
+        <button type="button" id="logout-button" class="btn-logout" style="margin-bottom: 20px;">
+            Sair da Conta
+        </button>
+    </div>
+
+
+    <!-- LIGAÇÃO COM O NOVO JAVASCRIPT -->
+    <script src="/static/js/profile.js"></script>
+</body>
+
+</html>
