@@ -1,10 +1,4 @@
-Opa\! Com certeza. Seu projeto está bem estruturado, e a documentação a seguir ajudará qualquer pessoa a entendê-lo e configurá-lo.
-
-Aqui está a documentação completa para seu projeto backend do FalaAI, incluindo a descrição, o arquivo `.env` de exemplo e as instruções de configuração.
-
------
-
-# Documentação do Backend do FalaAI 🤖
+# Documentação do Backend do ChatBot FalaAI 🤖
 
 ## 1\. Descrição do Projeto
 
